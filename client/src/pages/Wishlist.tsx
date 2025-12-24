@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { useSongs, useToggleFavorite } from "@/hooks/use-songs";
 import { useAudioPlayer } from "@/hooks/use-audio-player";
 import { Sidebar } from "@/components/Sidebar";
@@ -9,7 +10,8 @@ import {
   Heart, 
   Clock,
   Music2,
-  Heart as HeartIcon
+  Heart as HeartIcon,
+  ArrowLeft
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -48,12 +50,19 @@ export default function Wishlist() {
           
           {/* Header */}
           <header className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-2 flex items-center gap-3">
-                <HeartIcon className="w-8 h-8 text-primary fill-primary" />
-                <span className="text-gradient">My Wishlist</span>
-              </h2>
-              <p className="text-muted-foreground">{favoriteSongs.length} saved tracks</p>
+            <div className="flex items-center gap-4">
+              <Link href="/">
+                <Button size="icon" variant="ghost" className="rounded-full text-muted-foreground hover:text-primary hover:bg-white/5">
+                  <ArrowLeft className="w-5 h-5" />
+                </Button>
+              </Link>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-2 flex items-center gap-3">
+                  <HeartIcon className="w-8 h-8 text-primary fill-primary" />
+                  <span className="text-gradient">My Wishlist</span>
+                </h2>
+                <p className="text-muted-foreground">{favoriteSongs.length} saved tracks</p>
+              </div>
             </div>
             <div className="hidden md:block">
                {playing && <Visualizer isPlaying={playing} />}
