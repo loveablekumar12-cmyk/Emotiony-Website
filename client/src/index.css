@@ -10,36 +10,40 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Dark mode by default for music app */
-  --background: 240 10% 4%;
+  /* Deep Dark Blue Background */
+  --background: 220 40% 8%;
   --foreground: 0 0% 98%;
 
-  --card: 240 10% 7%;
+  /* Slightly lighter for cards */
+  --card: 220 35% 12%;
   --card-foreground: 0 0% 98%;
 
-  --popover: 240 10% 7%;
+  --popover: 220 35% 12%;
   --popover-foreground: 0 0% 98%;
 
-  /* Neon Purple/Pink Accent */
-  --primary: 280 80% 60%;
-  --primary-foreground: 0 0% 100%;
+  /* Peach/Beige Primary */
+  --primary: 28 80% 80%;
+  --primary-foreground: 220 40% 10%;
 
-  --secondary: 240 5% 15%;
-  --secondary-foreground: 0 0% 98%;
+  /* Light Blue Secondary */
+  --secondary: 190 50% 70%;
+  --secondary-foreground: 220 40% 10%;
 
-  --muted: 240 5% 15%;
-  --muted-foreground: 240 5% 65%;
+  --muted: 220 30% 20%;
+  --muted-foreground: 220 20% 70%;
 
-  --accent: 180 80% 50%; /* Neon Cyan for secondary accents */
-  --accent-foreground: 240 10% 4%;
+  /* Dark Grey/Blue Accent */
+  --accent: 220 30% 25%;
+  --accent-foreground: 0 0% 98%;
 
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 240 5% 15%;
-  --input: 240 5% 15%;
-  --ring: 280 80% 60%;
+  --border: 220 30% 20%;
+  --input: 220 30% 20%;
+  --ring: 28 80% 80%;
 
-  --radius: 1rem;
+  --radius: 1.5rem;
 }
 
 @layer base {
@@ -58,15 +62,15 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-400 to-accent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-white;
   }
   
   .glass-panel {
-    @apply bg-card/60 backdrop-blur-xl border border-white/5 shadow-xl;
+    @apply bg-card/40 backdrop-blur-xl border border-white/5 shadow-2xl;
   }
 
   .neon-glow {
-    box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.5);
+    box-shadow: 0 0 30px -10px hsl(var(--primary) / 0.3);
   }
 
   /* Custom Scrollbar */
@@ -87,7 +91,7 @@ input[type=range] {
   @apply appearance-none bg-transparent cursor-pointer;
 }
 input[type=range]::-webkit-slider-thumb {
-  @apply appearance-none w-3 h-3 rounded-full bg-white shadow-lg border-0 mt-[-5px] transition-transform hover:scale-125;
+  @apply appearance-none w-3 h-3 rounded-full bg-primary shadow-lg border-0 mt-[-5px] transition-transform hover:scale-125;
 }
 input[type=range]::-webkit-slider-runnable-track {
   @apply w-full h-1 bg-white/10 rounded-full;

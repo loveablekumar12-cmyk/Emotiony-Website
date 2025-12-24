@@ -50,10 +50,10 @@ export default function Home() {
           {/* Header */}
           <header className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-1">
-                Good Evening
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
+                <span className="text-gradient">Welcome Back</span>
               </h2>
-              <p className="text-muted-foreground">Ready for some beats?</p>
+              <p className="text-muted-foreground">Your daily mix is ready.</p>
             </div>
             <div className="hidden md:block">
                {playing && <Visualizer isPlaying={playing} />}
@@ -65,55 +65,55 @@ export default function Home() {
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-white/5 p-6 md:p-10 group"
+              className="relative rounded-[2rem] overflow-hidden glass-panel p-8 md:p-12 group neon-glow"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent z-0" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/5 z-0" />
               
-              <div className="relative z-10 flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-10">
-                <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 rotate-3 group-hover:rotate-0 transition-transform duration-500">
+              <div className="relative z-10 flex flex-col md:flex-row items-center md:items-end gap-8 md:gap-12">
+                <div className="w-56 h-56 md:w-64 md:h-64 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 rotate-3 group-hover:rotate-0 transition-transform duration-500 border-2 border-white/5">
                   {featuredSong.coverUrl ? (
                     <img src={featuredSong.coverUrl} className="w-full h-full object-cover" alt="Album Art" />
                   ) : (
                     <div className="w-full h-full bg-zinc-800 flex items-center justify-center">
-                      <Music2 className="w-16 h-16 text-zinc-600" />
+                      <Music2 className="w-20 h-20 text-zinc-600" />
                     </div>
                   )}
                 </div>
                 
-                <div className="flex-1 text-center md:text-left space-y-4">
+                <div className="flex-1 text-center md:text-left space-y-5">
                   <div>
-                    <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2 inline-block">Featured Track</span>
-                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-2 leading-tight">
+                    <span className="px-4 py-1.5 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-4 inline-block border border-primary/20">Featured Track</span>
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-3 leading-tight tracking-tight">
                       {featuredSong.title}
                     </h1>
-                    <p className="text-lg md:text-xl text-white/70 font-medium">
+                    <p className="text-xl md:text-2xl text-white/80 font-medium">
                       {featuredSong.artist}
                     </p>
                   </div>
                   
-                  <div className="flex items-center justify-center md:justify-start gap-4 pt-2">
+                  <div className="flex items-center justify-center md:justify-start gap-5 pt-4">
                     <Button 
                       size="lg" 
-                      className="rounded-full px-8 py-6 text-base font-bold bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:scale-105"
+                      className="rounded-full px-10 py-7 text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:scale-105"
                       onClick={() => playSong(featuredSong)}
                     >
                       {playing && currentSong?.id === featuredSong.id ? (
                         <>
-                          <Pause className="w-5 h-5 mr-2 fill-current" /> Pause
+                          <Pause className="w-6 h-6 mr-3 fill-current" /> Pause
                         </>
                       ) : (
                         <>
-                          <Play className="w-5 h-5 mr-2 fill-current" /> Play Now
+                          <Play className="w-6 h-6 mr-3 fill-current" /> Play Now
                         </>
                       )}
                     </Button>
                     <Button 
                       size="lg" 
                       variant="outline" 
-                      className="rounded-full px-4 py-6 border-white/10 hover:bg-white/10 text-white"
+                      className="rounded-full h-14 w-14 p-0 border-white/10 hover:bg-white/10 text-white hover:text-primary hover:border-primary/50"
                       onClick={() => toggleFavorite.mutate({ id: featuredSong.id, isFavorite: !featuredSong.isFavorite })}
                     >
-                      <Heart className={cn("w-5 h-5 transition-colors", featuredSong.isFavorite && "fill-primary text-primary")} />
+                      <Heart className={cn("w-6 h-6 transition-colors", featuredSong.isFavorite && "fill-primary text-primary")} />
                     </Button>
                   </div>
                 </div>
@@ -122,13 +122,13 @@ export default function Home() {
           )}
 
           {/* Song List */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                <ListMusic className="w-5 h-5 text-primary" /> 
+              <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                <ListMusic className="w-6 h-6 text-secondary" /> 
                 Trending Songs
               </h3>
-              <Button variant="link" className="text-muted-foreground hover:text-white">View All</Button>
+              <Button variant="link" className="text-secondary hover:text-white">View All</Button>
             </div>
 
             {isLoading ? (
