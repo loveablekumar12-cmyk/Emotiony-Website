@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { useSongs, useToggleFavorite } from "@/hooks/use-songs";
 import { useAudioPlayer } from "@/hooks/use-audio-player";
 import { Sidebar } from "@/components/Sidebar";
@@ -75,6 +76,11 @@ export default function Home() {
                   className="pl-12 rounded-full border-white/10 bg-card/40 text-white placeholder:text-muted-foreground focus:border-primary/50"
                 />
               </div>
+              <Link href="/wishlist">
+                <Button size="icon" variant="ghost" className="rounded-full text-muted-foreground hover:text-primary hover:bg-white/5">
+                  <Heart className="w-5 h-5" />
+                </Button>
+              </Link>
               <div className="hidden md:block">
                  {playing && <Visualizer isPlaying={playing} />}
               </div>
