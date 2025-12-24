@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSongs, useToggleFavorite } from "@/hooks/use-songs";
 import { useAudioPlayer } from "@/hooks/use-audio-player";
 import { Sidebar } from "@/components/Sidebar";
@@ -10,15 +11,23 @@ import {
   MoreHorizontal,
   Clock,
   Music2,
-  ListMusic
+  ListMusic,
+  Search as SearchIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
   const { data: songs, isLoading } = useSongs();
   const toggleFavorite = useToggleFavorite();
+
+  const filteredSongs = songs?.filter((song) =>
+    song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    song.artist.toLowerCase().includes(searchQuery.toLowerCase())
+  ) || [];
   
   const { 
     currentSong, 
@@ -48,15 +57,27 @@ export default function Home() {
         <div className="relative px-6 py-8 md:px-12 md:py-12 max-w-7xl mx-auto space-y-12">
           
           {/* Header */}
-          <header className="flex items-center justify-between mb-8">
+          <header className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
             <div>
               <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
                 <span className="text-gradient">Welcome Back</span>
               </h2>
               <p className="text-muted-foreground">Your daily mix is ready.</p>
             </div>
-            <div className="hidden md:block">
-               {playing && <Visualizer isPlaying={playing} />}
+            <div className="flex items-center gap-4 w-full md:w-auto">
+              <div className="relative flex-1 md:flex-none md:w-64">
+                <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Search songs..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-12 rounded-full border-white/10 bg-card/40 text-white placeholder:text-muted-foreground focus:border-primary/50"
+                />
+              </div>
+              <div className="hidden md:block">
+                 {playing && <Visualizer isPlaying={playing} />}
+              </div>
             </div>
           </header>
 
@@ -126,9 +147,8 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <h3 className="text-2xl font-bold text-white flex items-center gap-3">
                 <ListMusic className="w-6 h-6 text-secondary" /> 
-                Trending Songs
+                {searchQuery ? "Search Results" : "Trending Songs"}
               </h3>
-              <Button variant="link" className="text-secondary hover:text-white">View All</Button>
             </div>
 
             {isLoading ? (
@@ -147,7 +167,7 @@ export default function Home() {
                 </div>
 
                 <div className="divide-y divide-white/5">
-                  {songs?.map((song, index) => {
+                  {filteredSongs.map((song, index) => {
                     const isCurrent = currentSong?.id === song.id;
                     return (
                       <motion.div
