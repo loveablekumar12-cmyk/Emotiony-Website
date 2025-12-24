@@ -1,10 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { 
   Home, 
-  Library, 
-  Search, 
-  ListMusic, 
-  Mic2,
+  Heart,
   Settings
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -14,10 +11,7 @@ export function Sidebar() {
 
   const navItems = [
     { icon: Home, label: "Home", href: "/" },
-    { icon: Search, label: "Search", href: "/search" },
-    { icon: Library, label: "Library", href: "/library" },
-    { icon: ListMusic, label: "Playlists", href: "/playlists" },
-    { icon: Mic2, label: "Artists", href: "/artists" },
+    { icon: Heart, label: "Wishlist", href: "/wishlist" },
   ];
 
   const secondaryNav = [

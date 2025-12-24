@@ -4,18 +4,14 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/Home";
+import Wishlist from "@/pages/Wishlist";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      {/* 
-        In a real full app, I would add:
-        <Route path="/library" component={Library} />
-        <Route path="/search" component={Search} />
-        <Route path="/settings" component={Settings} />
-      */}
+      <Route path="/wishlist" component={Wishlist} />
       <Route component={NotFound} />
     </Switch>
   );
